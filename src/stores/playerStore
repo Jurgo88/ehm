@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
-import { getPlayersByTeamId } from '../services/playersService'
+import { fetchPlayersByTeam } from '../services/playersService'
 import type { Player } from '../types/Player'
 
 export const usePlayerStore = defineStore('playerStore', () => {
@@ -12,7 +12,7 @@ export const usePlayerStore = defineStore('playerStore', () => {
     loading.value = true
     error.value = null
     try {
-      players.value = await getPlayersByTeamId(teamId)
+      players.value = await fetchPlayersByTeam(teamId)
     } catch (err) {
       error.value = 'Nepodarilo sa načítať hráčov.'
       console.error(err)

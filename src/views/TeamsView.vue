@@ -12,14 +12,8 @@ import TeamList from '@/components/TeamList.vue';
 
 <template>
   <div>
-    <h2>Hokejové tímy </h2>
-    <!-- <ul>
-      <li v-for="team in teamStore.teams" :key="team.id">
-        <img :src="team.logo ?? ''" alt="logo" width="50" />
-        {{ team.name }}
-        <router-link :to="{ name: 'TeamView', params: { id: team.id } }">Detail</router-link>
-      </li>
-    </ul> -->
+    <h2>Hokejové tímy View </h2>
+
     <TeamList />
   </div>
 </template>

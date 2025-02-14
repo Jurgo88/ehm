@@ -4,4 +4,7 @@ export interface Team {
   name: string
   logo: string | null
   league_id: string
+  city: string
+  arena: string
+  coach: string
 }

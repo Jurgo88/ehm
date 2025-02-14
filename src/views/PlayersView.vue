@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
-import { getPlayers } from '../services/playersService';
+import { fetchPlayers } from '../services/playersService';
 import type { Player } from '../types/Player';
 import PlayerDetail from '../components/PlayerDetail.vue';
+
+
 
 const players = ref<Player[]>([]);
 const loading = ref(true);
@@ -10,7 +12,7 @@ const error = ref<string | null>(null);
 
 onMounted(async () => {
     try {
-        players.value = await getPlayers();
+        players.value = await fetchPlayers();
     } catch (err) {
         error.value = err.message; // Zobraz chybu používateľovi
         console.error("Chyba v komponente:", err);
@@ -22,4 +24,5 @@ onMounted(async () => {
 
 <template>
     <PlayerDetail />
+
 </template>

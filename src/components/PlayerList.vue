@@ -1,9 +1,44 @@
+<script setup lang="ts">
+import { ref, onMounted } from 'vue';
+import { fetchPlayersByTeam } from '../services/playersService';
+import type { Player } from '../types/Player';
+import { useRoute } from 'vue-router';
+
+const route = useRoute();
+
+const players = ref<Player[]>([]);
+const loading = ref(false);
+const error = ref<string | null>(null);
+
+const loadPlayers = async (teamId: string) => {
+    console.log("loadPlayers in PlayerList", teamId);
+    loading.value = true;
+    error.value = null;
+
+    try {
+        players.value = await fetchPlayersByTeam(teamId);
+    } catch (err: any) {
+        error.value = err.message;
+        console.error("Chyba pri načítavaní hráčov:", err);
+    } finally {
+        loading.value = false;
+    }
+};
+
+onMounted(() => {
+    const teamId = Array.isArray(route.params.id) ? route.params.id[0] : route.params.id;
+    if (teamId) {
+        loadPlayers(teamId);
+    }
+});
+</script>
+
 <template>
     <div>
-        <h2>Hráči tímu {{ team ? team.name : '' }}</h2>
+        <h2>Hráči tímu</h2>
         <div v-if="loading">Načítavam hráčov...</div>
         <div v-if="error">{{ error }}</div>
-        <ul v-if="players.length > 0">
+        <ul v-if="players.length">
             <li v-for="player in players" :key="player.id">
                 {{ player.name }}
             </li>
@@ -11,24 +46,3 @@
         <div v-else-if="!loading && !error">Žiadni hráči nenájdení.</div>
     </div>
 </template>
-
-<script setup lang="ts">
-import { ref, onMounted, } from 'vue';
-import type { Player } from '../types/Player';
-import type { Team } from '../types/Team';
-
-const props = defineProps<{
-    team: Team | null;
-}>();
-
-const players = ref<Player[]>([]);
-const loading = ref(false);
-const error = ref<string | null>(null);
-
-// Tu bude logika pre fetchovanie hráčov pre vybraný tím
-onMounted(() => {
-    if (props.team) {
-        // Fetch hráčov pre props.team
-    }
-});
-</script>

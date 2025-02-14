@@ -15,6 +15,7 @@
 .navbar {
     background: #1e3a8a;
     padding: 10px;
+    width: 100%;
 }
 
 .navbar ul {

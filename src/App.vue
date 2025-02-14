@@ -1,11 +1,12 @@
 <script setup lang="ts">
-import Navbar from './components/Navbar.vue';
+import Navbar from './components/NavBar.vue';
+import MainLayout from './layouts/MainLayout.vue';
 </script>
 
 <template>
   <div>
-    <Navbar />
-    <router-view />
+    <MainLayout />
+
   </div>
 </template>
 

@@ -19,8 +19,8 @@ const router = createRouter({
     },
     {
       path: '/teams/:id',
-      name: 'team',
-      component: () => import('../views/TeamView.vue'),
+      name: 'teamdetail',
+      component: () => import('../components/TeamDetail.vue'),
     },
     {
       path: '/players',
