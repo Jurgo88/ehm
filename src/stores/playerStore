@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
 import { fetchPlayersByTeam } from '../services/playersService'
-import type { Player } from '@/types/Player'
+import { type Player } from '@/types/Player'
 
 export const usePlayerStore = defineStore('playerStore', () => {
   const players = ref<Player[]>([])
