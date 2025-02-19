@@ -27,6 +27,11 @@ const router = createRouter({
       name: 'players',
       component: () => import('../views/PlayersView.vue'),
     },
+    {
+      path: '/:catchAll(.*)*', // Zachytí všechny neexistující cesty
+      name: 'NotFound',
+      component: () => import('../views/NotFoundView.vue'), // Vytvořte si komponentu NotFoundView.vue
+    },
   ],
 })
 
