@@ -70,10 +70,11 @@ const selectTeam = async (teamId: string) => {
 <script setup lang="ts">
 import { useTeams } from '../hooks/useTeams'
 import { useTeamStore } from '../stores/teamsStore'
-import { usePlayerStore } from '../stores/playerStore';
+import { usePlayerStore } from '../stores/playerStore.ts';
 import PlayerList from '@/components/PlayerList.vue';
 import TeamDetail from './TeamDetail.vue';
 import { ref, onMounted, watch } from 'vue'
+import type { Team } from '../types/Team'
 import { useRouter } from 'vue-router';
 import router from '@/router';
 
@@ -82,7 +83,7 @@ const teamStore = useTeamStore()
 
 
 
-const selectTeam = (team) => {
+const selectTeam = (team: Team) => {
     console.log('Selected team in teamList:', team.name)
     teamStore.selectTeam(team.id)
     router.push(`/teams/${team.id}`)
@@ -91,7 +92,7 @@ const selectTeam = (team) => {
 watch(teams, (newTeams) => {
     if (newTeams) {
         console.log('Teams in teamList:', newTeams);
-        teamStore.setTeams(newTeams);
+        teamStore.setTeams(newTeams as Team[]);
         console.log('Teams in teamList:', newTeams);
     }
 });

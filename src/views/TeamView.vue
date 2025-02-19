@@ -17,7 +17,7 @@ onMounted(async () => {
     try {
         loading.value = true;
         const teams = await teamStore.loadTeams(); // Načítame tímy zo store
-        team.value = teams.find((t) => t.id === teamId); // Nájdeme tím podľa ID
+        team.value = teams.find((t) => t.id === teamId) ?? null; // Nájdeme tím podľa ID
         if (!team.value) {
             throw new Error('Team not found')
         }

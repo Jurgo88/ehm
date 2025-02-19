@@ -11,7 +11,7 @@ const props = defineProps<{
 }>();
 const teamStore = useTeamStore();
 const route = useRoute();
-const teamId = route.params.id; // Prístup k ID tímu z URL
+const teamId = Array.isArray(route.params.id) ? route.params.id[0] : route.params.id; // Prístup k ID tímu z URL
 
 // const { data: players, isLoading, error } = usePlayersByTeamId(teamId); // Načítavame detail tímu
 

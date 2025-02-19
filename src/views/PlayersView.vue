@@ -14,7 +14,7 @@ onMounted(async () => {
     try {
         players.value = await fetchPlayers();
     } catch (err) {
-        error.value = err.message; // Zobraz chybu používateľovi
+        error.value = (err as Error).message; // Zobraz chybu používateľovi
         console.error("Chyba v komponente:", err);
     } finally {
         loading.value = false;

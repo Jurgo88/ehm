@@ -84,11 +84,12 @@ export const useTeamStore = defineStore('teamStore', {
   },
 
   actions: {
-    async loadTeams(forceRefresh = false) {
+    async loadTeams(forceRefresh = false): Promise<Team[]> {
+      // Pridali sme : Promise<Team[]>
       console.log('loadteams in store')
       if (!forceRefresh && this.teams.length > 0 && Date.now() - this.lastFetched < 1000 * 60) {
         console.log('Používam cacheované dáta')
-        return
+        return this.teams // Vrátime cacheované dáta
       }
 
       this.loading = true
@@ -96,12 +97,14 @@ export const useTeamStore = defineStore('teamStore', {
 
       try {
         const teams = await getTeams()
-        this.teams = [...teams] // Kopírovanie dát
-        this.lastFetched = Date.now() // Uloženie času posledného fetchu
+        this.teams = [...teams]
+        this.lastFetched = Date.now()
         console.log('Načítané tímy:', this.teams)
+        return this.teams // Vrátime načítané tímy
       } catch (error) {
         console.error('Chyba pri načítavaní tímov:', error)
         this.error = error instanceof Error ? error.message : 'Nepodarilo sa načítať tímy.'
+        return [] // Vrátime prázdne pole v prípade chyby
       } finally {
         this.loading = false
       }

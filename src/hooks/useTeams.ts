@@ -34,8 +34,8 @@ export const useTeamsWithStore = () => {
     staleTime: 1000 * 60 * 60 * 24,
   })
 
-  if (data) {
-    teamStore.setTeams(data)
+  if (data && data.value) {
+    teamStore.setTeams(data.value)
   }
 
   return { isLoading, error, teams: teamStore.teams }
