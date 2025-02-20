@@ -1,6 +1,6 @@
 <template>
     <footer class="footer">
-        <p>🏒 Hokejový manažér © 2025</p>
+        <p>🥅🏒 Hokejový manažér © 2025 🏆 </p>
     </footer>
 </template>
 

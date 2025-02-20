@@ -5,15 +5,12 @@ import Footer from '../components/Footer.vue'
 
 <template>
     <div class="layout">
-        <!-- Navigácia -->
         <Navbar />
 
-        <!-- Hlavný obsah (dynamický podľa cesty) -->
         <main class="content">
             <router-view />
         </main>
 
-        <!-- Pätička -->
         <Footer />
     </div>
 </template>

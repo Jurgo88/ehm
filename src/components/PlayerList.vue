@@ -17,8 +17,8 @@ const loadPlayers = async (teamId: string) => {
 
     try {
         players.value = await fetchPlayersByTeam(teamId);
-    } catch (err: any) {
-        error.value = err.message;
+    } catch (err: unknown) {
+        error.value = (err as Error).message;
         console.error("Chyba pri načítavaní hráčov:", err);
     } finally {
         loading.value = false;
